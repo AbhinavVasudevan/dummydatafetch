@@ -4,12 +4,13 @@
     <title>Domain Data API</title>
     <script>
         window.onload = function() {
-            fetch('data.csv', { headers: { 'Accept': 'text/plain' } }) // Ensure raw text fetch
+            fetch('https://raw.githubusercontent.com/AbhinavVasudevan/dummydatafetch/main/data.csv') // Replace with your URL
                 .then(response => response.text())
                 .then(csv => {
                     document.getElementById('data').textContent = csv;
-                });
-        }
+                })
+                .catch(error => console.error('Error fetching CSV:', error));
+        };
     </script>
     <style>
         pre {
