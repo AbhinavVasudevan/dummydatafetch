@@ -1,32 +1,23 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Domain Data API</title>
     <script>
-        // This function will handle redirecting to the data
         window.onload = function() {
-            const params = new URLSearchParams(window.location.search);
-            if (params.get('format') === 'csv') {
-                window.location.href = 'data.csv';
-            } else {
-                fetch('data.csv')
-                    .then(response => response.text())
-                    .then(csv => {
-                        const lines = csv.split('\n');
-                        const headers = lines[0].split(',');
-                        const data = lines[1].split(',');
-                        
-                        const result = {};
-                        headers.forEach((header, index) => {
-                            result[header] = data[index];
-                        });
-                        
-                        document.getElementById('data').textContent = JSON.stringify(result, null, 2);
-                    });
-            }
+            fetch('data.csv')
+                .then(response => response.text())
+                .then(csv => {
+                    document.getElementById('data').textContent = csv;
+                });
         }
     </script>
+    <style>
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+        }
+    </style>
 </head>
 <body>
     <pre id="data"></pre>
